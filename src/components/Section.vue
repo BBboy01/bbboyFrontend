@@ -10,23 +10,29 @@
         其实人跟树一样，越是向往高出的阳光，他的根就要越往下，伸向地底深处...
       </span>
       <div class="button">
-        <img src="@/assets/images/credit.svg" class="icon" alt="" />
-        <img src="@/assets/images/icon-ring.svg" class="ring" alt="" />
+        <div class="icon-wrapper">
+          <img src="@/assets/images/credit.svg" class="icon" alt="" />
+          <img src="@/assets/images/icon-ring.svg" class="ring" alt="" />
+        </div>
+        <div class="text-wrapper">查看数据</div>
       </div>
     </div>
-    <div class="pages"></div>
+    <div class="pages">
+      <Books></Books>
+      <Books></Books>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Books from './Books'
 
 export default {
   setup () {
 
   },
   components: {
-
+    Books
   },
 }
 </script>
@@ -34,6 +40,12 @@ export default {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .wrapper {
+  .pages {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 30px;
+  }
+
   display: grid;
   grid-template-columns: 500px auto;
   max-width: 1234px;
@@ -78,14 +90,14 @@ export default {
       height: 77px;
       padding: 12px;
       background: linear-gradient(180deg, #ffffff 0%, #d9dfff 100%);
+      border-radius: 20px;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1),
         0px 20px 40px rgba(23, 0, 102, 0.2),
         inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
       display: grid;
       grid-template-columns: 53px auto;
       align-items: center;
-      position: relative;
+      text-align: center;
 
       *,
       & {
@@ -97,35 +109,42 @@ export default {
           0px 30px 60px rgba(23, 0, 102, 0.5),
           inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.5);
         transform: translateY(-3px);
+        cursor: pointer;
+
+        .icon {
+          transform: scale(1.2);
+        }
+
+        .ring {
+          transform: rotate(30deg) translate(1px, 1px) scale(1.2);
+        }
       }
 
-      &:hover .ring {
-        transform: scale(1.2);
-      }
-
-      .icon {
-        position: relative;
+      .icon-wrapper {
+        background: linear-gradient(200.44deg, #4316db 13.57%, #9076e7 98.38%);
         width: 45px;
         height: 45px;
-        background: linear-gradient(
-          200.44deg,
-          rgb(67, 22, 219) 13.57%,
-          rgb(144, 118, 231) 98.38%
-        );
-        box-shadow: rgb(182 153 255 / 30%) 0px 10px 20px;
-        border-radius: 50px;
-        padding: 8px;
-        margin: auto;
-        top: 2px;
-        left: 1px;
+        border-radius: 50%;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        justify-self: center;
+        position: relative;
+
+        .icon {
+          width: 29px;
+          height: 29px;
+        }
+
+        .ring {
+          position: absolute;
+          top: -15px;
+          left: -16px;
+        }
       }
 
-      .ring {
-        position: absolute;
-        width: 55px;
-        height: 55px;
-        top: 13px;
-        left: 13px;
+      .text-wrapper {
+        font-size: 25px;
       }
     }
   }
