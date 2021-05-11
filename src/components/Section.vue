@@ -17,19 +17,36 @@
         <div class="text-wrapper">查看数据</div>
       </div>
     </div>
-    <div class="pages">
-      <Books></Books>
-      <Books></Books>
+    <div class="swipper">
+      <div class="pages">
+        <template v-for="item in noteInfo" :key="item.id">
+          <Books :articalName="item.title" :iconUrl="item.icon_url"> </Books>
+        </template>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import Books from './Books'
+import { getAllNote } from '../requests/getNote'
+import { onMounted } from 'vue'
+
 
 export default {
   setup () {
+    let noteInfo = ref([])
 
+    onMounted(() => {
+      getAllNote(2).then(res => {
+        noteInfo.value = res
+      })
+    })
+
+    return {
+      noteInfo
+    }
   },
   components: {
     Books
@@ -40,10 +57,12 @@ export default {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .wrapper {
-  .pages {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 30px;
+  .swipper {
+    .pages {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: 30px;
+    }
   }
 
   display: grid;
@@ -117,6 +136,14 @@ export default {
 
         .ring {
           transform: rotate(30deg) translate(1px, 1px) scale(1.2);
+        }
+
+        .icon-wrapper {
+          background: linear-gradient(
+            200.44deg,
+            #6120c9 13.57%,
+            #6ab5e0 98.38%
+          );
         }
       }
 

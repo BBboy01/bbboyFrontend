@@ -1,6 +1,11 @@
 <template>
   <div class="book">
-    <div class="cover"></div>
+    <div class="cover">
+      <div class="content">
+        <img :src="iconUrl" alt="" />
+        {{ articalName }}
+      </div>
+    </div>
     <div class="background"></div>
   </div>
 </template>
@@ -9,8 +14,22 @@
 
 
 export default {
-  setup () {
+  props: {
+    articalName: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
+    iconUrl: {
+      type: String,
+      default () {
+        return ''
+      }
+    }
+  },
 
+  setup () {
   },
   components: {
 
@@ -48,13 +67,29 @@ export default {
     border-radius: 60px 60px 60px 0px;
     background: rgba(31, 31, 71, 0.6);
     z-index: 1;
+    display: flex;
+    justify-content: center;
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-weight: bold;
+      font-size: 60px;
+
+      img {
+        width: 70px;
+      }
+    }
   }
 
   .background {
     position: absolute;
     width: 383px;
     height: 456px;
-    background-color: yellowgreen;
+    background: linear-gradient(rgb(50, 11, 149) 0%, rgb(24, 136, 192) 100%);
     border-radius: 60px 60px 60px 0px;
     transform: matrix(0.95, 0.14, 0, 0.99, 0, 0);
     transform-origin: left bottom;
