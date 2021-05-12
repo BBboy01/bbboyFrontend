@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <canvas id="myCanvas" @mousemove="followMouse"></canvas>
+    <!-- <canvas id="myCanvas" @mousemove="followMouse"></canvas> -->
+    <canvas id="myCanvas"></canvas>
   </div>
 </template>
 
@@ -146,7 +147,7 @@ export default {
       function animateDots () {
         ctx.clearRect(0, 0, canvas.width, canvas.height) //清除画布，否则线条会连在一起
         moveDots()
-        connectDots()
+        // connectDots()
         drawDots()
         requestAnimationFrame(animateDots)
       }
@@ -156,19 +157,13 @@ export default {
     })
 
 
-    const followMouse = (e) => {
-      mousePosition.x = e.pageX
-      mousePosition.y = e.pageY
-    }
-
-    // const backCenter = (e) => {
-    //   mousePosition.x = canvas.width / 2
-    //   mousePosition.y = canvas.height / 2
+    // const followMouse = (e) => {
+    //   mousePosition.x = e.pageX
+    //   mousePosition.y = e.pageY
     // }
 
     return {
-      followMouse,
-      //   backCenter
+      // followMouse,
     }
   },
   components: {
@@ -180,6 +175,10 @@ export default {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .wrapper {
-  background-color: #30333f;
+  background: #30333f;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 </style>
