@@ -8,25 +8,37 @@
 </template>
 
 <script>
-import Header from '../components/Header'
-import Bck from '../components/InfoBackground'
-import { ref, onMounted } from 'vue'
-import md from '../utils/md'
+import Header from '../components/frontstages/Header'
+import Bck from '../components/frontstages/InfoBackground'
+import { ref, onMounted, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 // 引入默认样式
 import 'highlight.js/scss/default.scss'
 // 引入个性化的vs2015样式
 import 'highlight.js/styles/vs2015.css'
+import { getSingleNote } from '../requests/getNote'
 
 
 export default {
   setup () {
+    const route = useRoute()
+    const router = useRouter()
+
+    let id = ref(route.path.split('/').slice(-1)[0])
+    let title = ref('')
     let mdHtml = ref('')
 
     onMounted(() => {
-      mdHtml.value = md
+      nextTick(async () => {
+        let data = await getSingleNote(id.value)
+        title.value = data.title
+        mdHtml.value = data.content
+      })
     })
 
     return {
+      id,
+      title,
       mdHtml
     }
   },
@@ -45,7 +57,7 @@ export default {
     width: 1200px;
     margin: 0 auto;
     font-size: 16px;
-    font-family: "微软雅黑", "宋体", "黑体", Arial;
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
     color: #e6efff;
 
     ul {

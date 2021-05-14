@@ -9,3 +9,10 @@ export function getAllNote(num) {
     },
   });
 }
+
+export function getSingleNote(id = 1) {
+  return request({
+    url: `/api/note/${id}`,
+    method: "get",
+  });
+}

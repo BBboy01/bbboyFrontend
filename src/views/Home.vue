@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from '../components/Header'
-import Waves from '../components/Waves'
-import Section from '../components/Section'
+import Header from '../components/frontstages/Header'
+import Waves from '../components/frontstages/Waves'
+import Section from '../components/frontstages/Section'
 
 export default {
   setup () {

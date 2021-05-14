@@ -30,7 +30,7 @@
 <script>
 import { ref } from 'vue'
 import Books from './Books'
-import { getAllNote } from '../requests/getNote'
+import { getAllNote } from '../../requests/getNote'
 import { onMounted } from 'vue'
 
 
@@ -62,6 +62,7 @@ export default {
       display: grid;
       grid-template-columns: 50% 50%;
       gap: 30px;
+      cursor: pointer;
     }
   }
 
