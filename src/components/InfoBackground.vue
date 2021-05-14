@@ -2,6 +2,7 @@
   <div class="wrapper">
     <!-- <canvas id="myCanvas" @mousemove="followMouse"></canvas> -->
     <canvas id="myCanvas"></canvas>
+    <slot> </slot>
   </div>
 </template>
 
@@ -176,9 +177,12 @@ export default {
 //@import url(); 引入公共css类
 .wrapper {
   background: #30333f;
-  position: absolute;
   height: 100%;
   width: 100%;
   z-index: -1;
+
+  canvas {
+    position: absolute;
+  }
 }
 </style>
