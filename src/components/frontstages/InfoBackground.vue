@@ -33,7 +33,7 @@ export default {
         x: (30 * canvas.width) / 100,
         y: (30 * canvas.height) / 100,
       }
-      var dots = {
+      let dots = {
         nb: 1000, //Dot的总数
         distance: 50,
         d_radius: 100,
@@ -44,10 +44,10 @@ export default {
         return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2)
       }
       function averageColorStyles (dot1, dot2) {
-        var color1 = dot1.color,
+        let color1 = dot1.color,
           color2 = dot2.color
 
-        var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
+        let r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
           g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
           b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius)
         return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b))
@@ -89,7 +89,7 @@ export default {
       function moveDots () {
         //Dot对象的移动
         for (let i = 0; i < dots.nb; i++) {
-          var dot = dots.array[i]
+          let dot = dots.array[i]
 
           if (dot.y < 0 || dot.y > canvas.height) {
             dot.vx = dot.vx
@@ -141,7 +141,7 @@ export default {
       function drawDots () {
         //引用Dot原型链，使用draw方法，在canvas上画出Dot对象
         for (let i = 0; i < dots.nb; i++) {
-          var dot = dots.array[i]
+          let dot = dots.array[i]
           dot.draw()
         }
       }

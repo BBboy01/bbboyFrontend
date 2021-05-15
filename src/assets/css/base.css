@@ -100,6 +100,22 @@ video {
   user-select: none;
 }
 
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 5px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(50, 50, 50, 0.7);
+}
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,

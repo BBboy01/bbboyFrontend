@@ -1,8 +1,10 @@
 <template>
   <div class="wrapper">
     <Bck>
-      <Header></Header>
-      <div class="article-content" v-html="mdHtml" id="dio"></div>
+      <el-scrollbar height="100vh">
+        <Header></Header>
+        <div class="article-content" v-html="mdHtml" id="dio"></div>
+      </el-scrollbar>
     </Bck>
   </div>
 </template>
@@ -10,7 +12,7 @@
 <script>
 import Header from '../components/frontstages/Header'
 import Bck from '../components/frontstages/InfoBackground'
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 // 引入默认样式
 import 'highlight.js/scss/default.scss'
@@ -39,7 +41,7 @@ export default {
     return {
       id,
       title,
-      mdHtml
+      mdHtml,
     }
   },
 
@@ -57,13 +59,16 @@ export default {
     width: 1200px;
     margin: 0 auto;
     font-size: 16px;
-    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: #e6efff;
+    padding-bottom: 10px;
 
     ul {
       list-style-type: disc;
       padding-left: 18px;
       margin: 10px 0;
+      line-height: 20px;
     }
 
     p {
@@ -74,6 +79,8 @@ export default {
       padding: 8px 2px;
       border-radius: 5px;
       position: relative;
+      font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New,
+        monospace;
 
       ol,
       li,
@@ -89,10 +96,13 @@ export default {
         margin: 0;
         margin-left: 40px;
         padding: 0;
+
         li {
           list-style: decimal-leading-zero;
           position: relative;
           padding-left: 10px;
+          line-height: 110%;
+
           .line-num {
             position: absolute;
             left: -40px;
@@ -105,11 +115,12 @@ export default {
       }
       b.name {
         position: absolute;
-        top: 2px;
-        right: 12px;
+        top: 0.8rem;
+        right: 1rem;
         z-index: 10;
-        color: #89db85;
+        color: hsla(0, 0%, 100%, 0.4);
         pointer-events: none;
+        font-size: 0.75rem;
       }
     }
 
