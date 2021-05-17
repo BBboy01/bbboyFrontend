@@ -1,13 +1,12 @@
 <template>
   <div>
-    there is backstage
-    <Visits />
+    <Navigation />
   </div>
 </template>
 
 <script>
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import Visits from '../components/backstages/Visits'
+import Navigation from '../components/backstages/Navigation'
 
 
 export default {
@@ -18,7 +17,7 @@ export default {
   },
 
   components: {
-    Visits,
+    Navigation,
   },
 }
 </script>

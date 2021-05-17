@@ -14,7 +14,7 @@
           <img src="@/assets/images/credit.svg" class="icon" alt="" />
           <img src="@/assets/images/icon-ring.svg" class="ring" alt="" />
         </div>
-        <div class="text-wrapper">查看数据</div>
+        <div class="text-wrapper" @click="goBackstage">查看数据</div>
       </div>
     </div>
     <div class="swipper">
@@ -29,6 +29,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Books from './Books'
 import { getAllNote } from '../../requests/getNote'
 import { onMounted } from 'vue'
@@ -38,14 +39,22 @@ export default {
   setup () {
     let noteInfo = ref([])
 
+    const route = useRoute()
+    const router = useRouter()
+
     onMounted(() => {
       getAllNote(2).then(res => {
         noteInfo.value = res
       })
     })
 
+    function goBackstage () {
+      router.push({ path: '/back-stage' })
+    }
+
     return {
-      noteInfo
+      noteInfo,
+      goBackstage
     }
   },
   components: {
