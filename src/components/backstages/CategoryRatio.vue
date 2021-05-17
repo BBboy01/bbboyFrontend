@@ -15,17 +15,22 @@ export default {
   setup () {
     let originChart = ref(null)
 
-    onMounted(() => {
+    onMounted(async () => {
+      //设置div容器高宽
+      originChart.value.style.width = window.innerWidth + 'px'
+      originChart.value.style.height = window.innerHeight * 1.2 + 'px'
       // 初始化图表
       let ratioChart = echarts.init(originChart.value)
 
       ratioChart.setOption(categoryRatioOption())
-    })
 
-    //当浏览器尺寸变化时自适应大小, 不用的话不会自适应大小。
-    window.onresize = function () {
-      barChart.resize()
-    }
+      //当浏览器尺寸变化时自适应大小, 不用的话不会自适应大小。
+      window.onresize = function () {
+        originChart.value.style.width = window.innerWidth + 'px'
+        originChart.value.style.height = window.innerHeight * 0.8 + 'px'
+        ratioChart.resize()
+      }
+    })
 
     return {
       originChart,

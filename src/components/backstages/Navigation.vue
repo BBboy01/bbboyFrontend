@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-tabs :tab-position="tabPosition">
-      <el-tab-pane label="笔记点击量"><Visits /></el-tab-pane>
-      <el-tab-pane label="配置管理"><CategoryRatio /></el-tab-pane>
+      <el-tab-pane label="笔记点击量"><slot name="visits" /></el-tab-pane>
+      <el-tab-pane label="配置管理"><slot name="category-ratio" /></el-tab-pane>
       <el-tab-pane label="角色管理">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
     </el-tabs>
@@ -11,8 +11,6 @@
 
 <script>
 import { ref } from 'vue'
-import Visits from '../../components/backstages/Visits'
-import CategoryRatio from '../../components/backstages/CategoryRatio'
 
 
 export default {
@@ -24,8 +22,6 @@ export default {
     }
   },
   components: {
-    Visits,
-    CategoryRatio,
   },
 }
 </script>

@@ -1,12 +1,21 @@
 <template>
   <div>
-    <Navigation />
+    <Navigation>
+      <template #visits>
+        <Visits />
+      </template>
+      <template #category-ratio>
+        <CategoryRatio />
+      </template>
+    </Navigation>
   </div>
 </template>
 
 <script>
 import { ref, onMounted, reactive, nextTick } from 'vue'
 import Navigation from '../components/backstages/Navigation'
+import Visits from '../components/backstages/Visits'
+import CategoryRatio from '../components/backstages/CategoryRatio'
 
 
 export default {
@@ -18,6 +27,8 @@ export default {
 
   components: {
     Navigation,
+    Visits,
+    CategoryRatio,
   },
 }
 </script>
