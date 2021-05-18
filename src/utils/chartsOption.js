@@ -54,15 +54,6 @@ function categoryRatioOption(dataList) {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
     },
-    toolbox: {
-      show: true,
-      feature: {
-        mark: { show: true },
-        dataView: { show: true, readOnly: false },
-        restore: { show: true },
-        saveAsImage: { show: true },
-      },
-    },
     series: [
       {
         name: "种类占比",

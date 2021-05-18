@@ -39,6 +39,7 @@ export default {
 
       //当浏览器尺寸变化时自适应大小, 不用的话不会自适应大小。
       window.onresize = function () {
+        //设置div容器高宽
         barChart.resize()
       }
 

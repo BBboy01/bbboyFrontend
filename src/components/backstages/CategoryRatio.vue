@@ -29,8 +29,8 @@ export default {
         ratioData.push({ value: result[k], name: k })
       }
       //设置div容器高宽
-      originChart.value.style.width = window.innerWidth + 'px'
-      originChart.value.style.height = window.innerHeight * 0.8 + 'px'
+      originChart.value.style.width = '1400px'
+      originChart.value.style.height = '500px'
       // 初始化图表
       let ratioChart = echarts.init(originChart.value)
       // 配置charts options
