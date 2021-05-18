@@ -28,7 +28,7 @@ function visitsOption(xVal, yVal) {
     series: [
       {
         realtimeSort: true,
-        name: "笔记访问次数",
+        name: "访问次数",
         data: yVal,
         type: "bar",
         color: "#3596B5",
@@ -40,10 +40,19 @@ function visitsOption(xVal, yVal) {
   };
 }
 
-function categoryRatioOption() {
+function categoryRatioOption(dataList) {
   return {
+    title: {
+      text: "类别占比",
+      left: "center",
+      top: "10%",
+    },
     legend: {
       top: "bottom",
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)",
     },
     toolbox: {
       show: true,
@@ -56,24 +65,15 @@ function categoryRatioOption() {
     },
     series: [
       {
-        name: "面积模式",
+        name: "种类占比",
         type: "pie",
-        radius: [50, 250],
+        radius: [50, 150],
         center: ["50%", "50%"],
         roseType: "area",
         itemStyle: {
           borderRadius: 8,
         },
-        data: [
-          { value: 40, name: "rose 1" },
-          { value: 38, name: "rose 2" },
-          { value: 32, name: "rose 3" },
-          { value: 30, name: "rose 4" },
-          { value: 28, name: "rose 5" },
-          { value: 26, name: "rose 6" },
-          { value: 22, name: "rose 7" },
-          { value: 18, name: "rose 8" },
-        ],
+        data: dataList,
       },
     ],
   };
