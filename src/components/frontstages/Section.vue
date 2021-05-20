@@ -9,12 +9,12 @@
       <span>
         其实人跟树一样，越是向往高出的阳光，他的根就要越往下，伸向地底深处...
       </span>
-      <div class="button">
+      <div class="button" @click="goBackstage">
         <div class="icon-wrapper">
           <img src="@/assets/images/credit.svg" class="icon" alt="" />
           <img src="@/assets/images/icon-ring.svg" class="ring" alt="" />
         </div>
-        <div class="text-wrapper" @click="goBackstage">查看数据</div>
+        <div class="text-wrapper">查看数据</div>
       </div>
     </div>
     <div class="swipper">

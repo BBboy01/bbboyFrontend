@@ -7,6 +7,9 @@
       <template #category-ratio>
         <CategoryRatio />
       </template>
+      <template #upload>
+        <Upload />
+      </template>
     </Navigation>
   </div>
 </template>
@@ -16,6 +19,7 @@ import { ref, onMounted, reactive, nextTick } from 'vue'
 import Navigation from '../components/backstages/Navigation'
 import Visits from '../components/backstages/Visits'
 import CategoryRatio from '../components/backstages/CategoryRatio'
+import Upload from '../components/backstages/Upload'
 
 
 export default {
@@ -29,6 +33,7 @@ export default {
     Navigation,
     Visits,
     CategoryRatio,
+    Upload,
   },
 }
 </script>
