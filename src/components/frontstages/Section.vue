@@ -20,7 +20,12 @@
     <div class="swipper">
       <div class="pages">
         <template v-for="item in noteInfo" :key="item.id">
-          <Books :articalName="item.title" :iconUrl="item.icon_url"> </Books>
+          <Books
+            :articalName="item.title"
+            :iconUrl="item.icon_url"
+            @click="toNote(item.id)"
+          >
+          </Books>
         </template>
       </div>
     </div>
@@ -48,15 +53,21 @@ export default {
       })
     })
 
-    function goBackstage () {
+    const goBackstage = () => {
       router.push({ path: '/back-stage' })
+    }
+
+    const toNote = id => {
+      router.push({ path: `/note/${id}` })
     }
 
     return {
       noteInfo,
-      goBackstage
+      goBackstage,
+      toNote,
     }
   },
+
   components: {
     Books
   },

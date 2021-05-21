@@ -73,6 +73,20 @@ export default {
 
     p {
       margin: 10px 0;
+
+      code {
+        color: #2bd600;
+        padding: 3px 5px;
+        margin: 0 2px;
+        border-radius: 2px;
+        white-space: nowrap;
+        background-color: #506664;
+      }
+
+      strong {
+        font-weight: bold;
+        padding: 3px 5px;
+      }
     }
 
     pre.hljs {

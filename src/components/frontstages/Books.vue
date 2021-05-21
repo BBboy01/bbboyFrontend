@@ -12,7 +12,6 @@
 
 <script>
 
-
 export default {
   props: {
     articalName: {
@@ -26,10 +25,10 @@ export default {
       default () {
         return ''
       }
-    }
+    },
   },
 
-  setup () {
+  setup (props) {
   },
   components: {
 
