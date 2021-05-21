@@ -34,6 +34,7 @@
 <script>
 import { ref, reactive, onMounted, nextTick } from 'vue'
 import { uploadNote } from '../../requests/upload'
+import { ElMessage } from 'element-plus'
 
 
 export default {
@@ -52,10 +53,19 @@ export default {
 
     const change = (file, fileList) => {
       let reader = new FileReader()
-      form.title = file.raw.name
-      reader.readAsText(file.raw, 'utf8')
-      reader.onload = () => {
-        form.content = reader.result
+      if (file.raw.name.split('.').slice(-1)[0] !== 'md') {
+        ElMessage({
+          showClose: true,
+          message: '仅支持上传 .md 结尾的文件哦',
+          type: 'error'
+        })
+        upload.value.clearFiles()
+      } else {
+        form.title = file.raw.name
+        reader.readAsText(file.raw, 'utf8')
+        reader.onload = () => {
+          form.content = reader.result
+        }
       }
     }
 
@@ -63,12 +73,20 @@ export default {
       upload.value.submit()
       let timeStamp = Date.parse(new Date())
       let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
-      console.log('upload', data)
-      console.log('submit!', form)
+      if (data.statusCode === 4001) {
+        ElMessage({
+          showClose: true,
+          message: data.msg,
+          type: 'success'
+        })
+      } else {
+        ElMessage({
+          showClose: true,
+          message: data.msg,
+          type: 'error'
+        })
+      }
     }
-
-    onMounted(() => {
-    })
 
     return {
       fileList,
@@ -78,10 +96,6 @@ export default {
       change,
       uploadFile,
     }
-  },
-
-  components: {
-
   },
 }
 </script>
