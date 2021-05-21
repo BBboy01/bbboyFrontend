@@ -1,0 +1,28 @@
+<template>
+  <div class="wrapper">
+    <div class="container">
+      <ul class="list">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+
+
+export default {
+  setup () {
+
+  },
+  components: {
+
+  },
+}
+</script>
+
+<style lang='scss' scoped>
+//@import url(); 引入公共css类
+</style>

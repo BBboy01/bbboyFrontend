@@ -6,7 +6,7 @@
         <span>不见其增</span>
         <span>而日有所长</span>
       </div>
-      <span>
+      <span class="slogan">
         其实人跟树一样，越是向往高出的阳光，他的根就要越往下，伸向地底深处...
       </span>
       <div class="button" @click="goBackstage">
@@ -97,6 +97,17 @@ export default {
     display: grid;
     gap: 30px;
 
+    @keyframes dSOCvT {
+      0% {
+        opacity: 0;
+        filter: blur(8px) saturate(300%) brightness(200%) hue-rotate(30deg);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px) saturate(100%) brightness(100%) hue-rotate(0deg);
+      }
+    }
+
     .title {
       display: flex;
       align-items: center;
@@ -107,6 +118,7 @@ export default {
       );
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: 2s ease 0s 1 normal forwards running dSOCvT;
 
       span {
         width: 77px;
@@ -123,6 +135,10 @@ export default {
       color: #000;
       max-width: 300px;
       line-height: 130%;
+    }
+
+    .slogan {
+      animation: 3s ease 0s 1 normal forwards running dSOCvT;
     }
 
     .button {

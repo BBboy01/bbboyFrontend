@@ -1,10 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="background">
+      <img src="@/assets/images/stars.svg" alt="" />
       <img
         src="@/assets/images/hero-wave1.svg"
         alt=""
-        style="top: 100px; filter: blur(60px)"
+        style="top: 150px; filter: blur(60px)"
       />
       <img src="@/assets/images/hero-wave2.svg" alt="" style="top: 350px" />
       <img
