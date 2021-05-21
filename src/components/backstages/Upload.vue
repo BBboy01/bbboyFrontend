@@ -1,71 +1,81 @@
 <template>
   <div class="wrapper">
-    <el-upload
-      class="upload-demo"
-      action="/api/note/add"
-      :on-change="handleChange"
-      :file-list="fileList"
-      :http-request="uploadFile"
-    >
-      <el-button size="small" type="primary">点击上传</el-button>
-      <template #tip>
-        <div class="el-upload__tip">只能上传 .md 结尾的文件</div>
-      </template>
-    </el-upload>
+    <el-form :model="form" label-width="80px">
+      <el-form-item label="分类">
+        <el-input v-model="form.category"></el-input>
+      </el-form-item>
+      <el-form-item label="图标URL">
+        <el-input v-model="form.iconUrl"></el-input>
+      </el-form-item>
+      <el-form-item label="文件">
+        <el-upload
+          class="upload-demo"
+          action=""
+          :multiple="false"
+          :file-list="fileList"
+          :auto-upload="false"
+          :http-request="uploadFile"
+          ref="upload"
+          :on-change="change"
+        >
+          <el-button size="small" type="primary">选取文件</el-button>
+          <template #tip>
+            <div class="el-upload__tip">只能上传 .md 结尾的文件</div>
+          </template>
+        </el-upload>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">上传</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted, nextTick } from 'vue'
 import { uploadNote } from '../../requests/upload'
 
 
 export default {
   setup () {
+    const upload = ref(null)
+
     let fileList = ref([])
+    let form = reactive({
+      title: '',
+      category: '',
+      iconUrl: '',
+      content: ''
+    })
 
-    const uploadFile = (param) => {
+    const uploadFile = () => { }
+
+    const change = (file, fileList) => {
       let reader = new FileReader()
-      let baseData
-      reader.readAsText(param.file, 'utf8')
-      console.log(reader.result)
-      reader.onload = function () {
-        baseData = reader.result
-        console.log(baseData)
-        uploadNote(baseData).then(res => {
-          console.log('上传笔记成功', res)
-        }).catch(err => {
-          console.log('笔记上传失败', err)
-        })
+      form.title = file.raw.name
+      reader.readAsText(file.raw, 'utf8')
+      reader.onload = () => {
+        form.content = reader.result
       }
+    }
 
-      // formData.append('file', param.file)
-      console.log('on upload')
-      // uploadNote(formData).then(res => {
-      //   console.log('上传笔记成功', res)
-      // }).catch(err => {
-      //   console.log('笔记上传失败', err)
-      // })
+    const onSubmit = async () => {
+      upload.value.submit()
+      let timeStamp = Date.parse(new Date())
+      let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
+      console.log('upload', data)
+      console.log('submit!', form)
     }
 
     onMounted(() => {
-      fileList.value = [{
-        name: 'food.jpeg',
-        url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-      }, {
-        name: 'food2.jpeg',
-        url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-      }]
     })
-
-    const handleChange = (file, fileList) => {
-      //   console.log(fileList)
-      //   fileList.value = fileList.value.slice(-3)
-    }
 
     return {
       fileList,
-      handleChange,
+      form,
+      onSubmit,
+      upload,
+      change,
       uploadFile,
     }
   },
