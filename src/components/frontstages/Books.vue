@@ -77,7 +77,8 @@ export default {
       flex-direction: column;
       color: white;
       font-weight: bold;
-      font-size: 60px;
+      font-size: 50px;
+      gap: 40px;
 
       img {
         width: 70px;

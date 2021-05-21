@@ -6,7 +6,6 @@
         ><slot name="category-ratio"
       /></el-tab-pane>
       <el-tab-pane label="上传笔记"><slot name="upload" /></el-tab-pane>
-      <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
     </el-tabs>
   </div>
 </template>

@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <el-form :model="form" label-width="80px">
-      <el-form-item label="分类">
+    <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm">
+      <el-form-item label="分类" prop="category">
         <el-input v-model="form.category"></el-input>
       </el-form-item>
-      <el-form-item label="图标URL">
+      <el-form-item label="图标URL" prop="iconUrl">
         <el-input v-model="form.iconUrl"></el-input>
       </el-form-item>
       <el-form-item label="文件">
@@ -17,6 +17,7 @@
           :http-request="uploadFile"
           ref="upload"
           :on-change="change"
+          limit="1"
         >
           <el-button size="small" type="primary">选取文件</el-button>
           <template #tip>
@@ -40,6 +41,7 @@ import { ElMessage } from 'element-plus'
 export default {
   setup () {
     const upload = ref(null)
+    const ruleForm = ref(null)
 
     let fileList = ref([])
     let form = reactive({
@@ -47,6 +49,14 @@ export default {
       category: '',
       iconUrl: '',
       content: ''
+    })
+    let rules = reactive({
+      category: [
+        { required: true, message: '请输入分类名称', trigger: 'blur' },
+      ],
+      iconUrl: [
+        { required: true, message: '请输入图标地址', trigger: 'blur' },
+      ],
     })
 
     const uploadFile = () => { }
@@ -69,23 +79,37 @@ export default {
       }
     }
 
-    const onSubmit = async () => {
-      upload.value.submit()
-      let timeStamp = Date.parse(new Date())
-      let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
-      if (data.statusCode === 4001) {
-        ElMessage({
-          showClose: true,
-          message: data.msg,
-          type: 'success'
-        })
-      } else {
-        ElMessage({
-          showClose: true,
-          message: data.msg,
-          type: 'error'
-        })
-      }
+    const onSubmit = () => {
+      ruleForm.value.validate(async valid => {
+        if (valid) {
+          upload.value.submit()
+          let timeStamp = Date.parse(new Date())
+          let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
+          upload.value.clearFiles()
+          ruleForm.value.resetFields()
+          if (data.statusCode === 4001) {
+            ElMessage({
+              showClose: true,
+              message: data.msg,
+              type: 'success'
+            })
+          } else {
+            ElMessage({
+              showClose: true,
+              message: data.msg,
+              type: 'error'
+            })
+          }
+        } else {
+          ElMessage({
+            showClose: true,
+            message: '每个参数都为必填',
+            type: 'warning'
+          })
+          return false
+        }
+      })
+
     }
 
     return {
@@ -95,6 +119,8 @@ export default {
       upload,
       change,
       uploadFile,
+      rules,
+      ruleForm,
     }
   },
 }
