@@ -3,7 +3,10 @@
     <Bck>
       <el-scrollbar height="100vh">
         <Header></Header>
-        <div class="article-content" v-html="mdHtml" id="dio"></div>
+        <div id="dio">
+          <span class="title">{{ noteInfo.title }}</span>
+          <div class="article-content" v-html="noteInfo.content"></div>
+        </div>
       </el-scrollbar>
     </Bck>
   </div>
@@ -12,8 +15,8 @@
 <script>
 import Header from '../components/frontstages/Header'
 import Bck from '../components/frontstages/InfoBackground'
-import { ref, onMounted, nextTick, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, reactive, onMounted, onUpdated } from 'vue'
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 // 引入默认样式
 import 'highlight.js/scss/default.scss'
 // 引入个性化的vs2015样式
@@ -24,31 +27,33 @@ import { getSingleNote } from '../requests/getNote'
 export default {
   setup () {
     const route = useRoute()
-    const router = useRouter()
 
     let id = ref(route.path.split('/').slice(-1)[0])
 
-    let title = ref('')
-    let mdHtml = ref('')
-
-    onMounted(() => {
-      nextTick(async () => {
-        let data = await getSingleNote(id.value)
-        title.value = data.title
-        mdHtml.value = data.content
-      })
+    let noteInfo = reactive({
+      title: '',
+      content: ''
     })
 
-    watch(() => {
-      return route.path
-    }, (state, preState) => {
-      location.reload()
+    onMounted(async () => {
+      let data = await getSingleNote(id.value)
+      noteInfo.title = data.title
+      noteInfo.content = data.content
+    })
+
+    onUpdated(async () => {
+      let data = await getSingleNote(id.value)
+      noteInfo.title = data.title
+      noteInfo.content = data.content
+    })
+
+    onBeforeRouteUpdate(to => {
+      id.value = to.path.split('/').slice(-1)[0]
     })
 
     return {
       id,
-      title,
-      mdHtml,
+      noteInfo,
     }
   },
 
@@ -70,6 +75,12 @@ export default {
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: #e6efff;
     padding-bottom: 10px;
+
+    .title {
+      display: block;
+      font-size: 50px;
+      margin-bottom: 30px;
+    }
 
     ul {
       list-style-type: disc;
