@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="background">
-      <img src="@/assets/images/stars.svg" alt="" />
+      <img src="@/assets/images/stars.svg" alt="" class="stars" />
       <img
         src="@/assets/images/hero-wave1.svg"
         alt=""
@@ -43,6 +43,21 @@ export default {
   background: linear-gradient(180deg, #4316db 0%, #9076e7 100%) no-repeat;
   z-index: -1;
   overflow: hidden;
+
+  @keyframes dSOCvT {
+    0% {
+      opacity: 0;
+      filter: blur(4px) saturate(200%) brightness(200%) hue-rotate(30deg);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0px) saturate(100%) brightness(100%) hue-rotate(0deg);
+    }
+  }
+
+  .stars {
+    animation: 2s ease 0s 1 normal forwards running dSOCvT;
+  }
 
   img {
     position: absolute;

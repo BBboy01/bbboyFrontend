@@ -2,13 +2,16 @@
   <div>
     <div class="header">
       <div class="logo">
-        <img src="@/assets/images/logo.svg" alt="" />
+        <a href="/">
+          <img src="@/assets/images/logo.svg" alt="" />
+        </a>
       </div>
       <div class="list">
         <ul>
           <li>
             <div><img src="@/assets/images/note.svg" alt="" /></div>
             <div>笔记</div>
+            <Card />
           </li>
           <li>
             <div><img src="@/assets/images/update.svg" alt="" /></div>
@@ -30,6 +33,7 @@
 </template>
 
 <script>
+import Card from './Card'
 
 
 export default {
@@ -37,7 +41,7 @@ export default {
 
   },
   components: {
-
+    Card,
   },
 }
 </script>
@@ -81,6 +85,7 @@ export default {
         padding: 0 20px;
         height: 100%;
         font-size: 15px;
+        position: relative;
 
         div {
           margin: 0 5px;

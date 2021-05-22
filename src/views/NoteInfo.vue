@@ -12,7 +12,7 @@
 <script>
 import Header from '../components/frontstages/Header'
 import Bck from '../components/frontstages/InfoBackground'
-import { ref, onMounted, nextTick, reactive } from 'vue'
+import { ref, onMounted, nextTick, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 // 引入默认样式
 import 'highlight.js/scss/default.scss'
@@ -27,6 +27,7 @@ export default {
     const router = useRouter()
 
     let id = ref(route.path.split('/').slice(-1)[0])
+
     let title = ref('')
     let mdHtml = ref('')
 
@@ -36,6 +37,12 @@ export default {
         title.value = data.title
         mdHtml.value = data.content
       })
+    })
+
+    watch(() => {
+      return route.path
+    }, (state, preState) => {
+      location.reload()
     })
 
     return {
