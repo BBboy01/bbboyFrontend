@@ -1,31 +1,55 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
+  <div class="wrapper" :style="cToggle">
+    <el-scrollbar height="300px">
       <ul class="list">
         <li v-for="item in noteInfo" :key="item.id" @click="goInfo(item.id)">
           <img :src="item.icon_url" alt="" />
           <span :title="item.title">{{ item.title }}</span>
         </li>
       </ul>
-    </div>
+    </el-scrollbar>
   </div>
 </template>
 
 <script>
 import { getAllNote } from '../../requests/getNote'
-import { ref, onMounted } from 'vue'
+import { ref, reactive, toRefs, onMounted, watch, onUpdated, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 
 export default {
-  setup () {
+  props: {
+    isShow: {
+      type: Boolean,
+      default () {
+        return false
+      },
+    }
+  },
+
+  setup (props) {
     const router = useRouter()
 
     let noteInfo = ref([])
+    let isShow = ref(props.isShow)
+
+    let cStyle = reactive({
+      opacity: 1,
+      transform: 'skew(0deg) translateY(0px)',
+    })
 
     const goInfo = id => {
       router.push({ path: `/note/${id}` })
     }
+
+    const cToggle = computed(() => {
+      console.log('dio')
+
+      return {
+        opacity: 1,
+        transform: 'skew(0deg) translateY(0px)'
+      }
+    })
 
     onMounted(() => {
       getAllNote().then(res => {
@@ -33,9 +57,18 @@ export default {
       })
     })
 
+    watch(() => {
+      return props.isShow
+    }, (status, preStatus) => {
+      cToggle(status)
+    })
+
     return {
       noteInfo,
       goInfo,
+      cStyle,
+      isShow,
+      cToggle,
     }
   },
 
@@ -58,10 +91,11 @@ export default {
   backdrop-filter: blur(40px);
   border-radius: 20px;
   padding: 20px;
+  transition: all 0.5s ease;
 
   .list {
     display: grid;
-    grid-template-columns: 150px;
+    grid-template-columns: 180px;
     gap: 10px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -70,10 +104,11 @@ export default {
       display: grid;
       grid-template-columns: 30px auto;
       gap: 10px;
+      margin-right: 5px;
 
       &:hover {
         span {
-          color: white;
+          color: whitesmoke;
         }
       }
 

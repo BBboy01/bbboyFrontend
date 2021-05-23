@@ -74,7 +74,7 @@ export default {
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      color: white;
+      color: whitesmoke;
       font-weight: bold;
       font-size: 50px;
       gap: 40px;

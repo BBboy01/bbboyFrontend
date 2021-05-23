@@ -8,10 +8,10 @@
       </div>
       <div class="list">
         <ul>
-          <li>
+          <li @click="toggleCard">
             <div><img src="@/assets/images/note.svg" alt="" /></div>
             <div>笔记</div>
-            <Card />
+            <Card :isShow="isShow" />
           </li>
           <li>
             <div><img src="@/assets/images/update.svg" alt="" /></div>
@@ -34,11 +34,21 @@
 
 <script>
 import Card from './Card'
+import { ref } from 'vue'
 
 
 export default {
   setup () {
+    let isShow = ref(true)
 
+    const toggleCard = () => {
+      isShow.value = !isShow.value
+    }
+
+    return {
+      isShow,
+      toggleCard,
+    }
   },
   components: {
     Card,
@@ -81,7 +91,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: #fff;
+        color: whitesmoke;
         padding: 0 20px;
         height: 100%;
         font-size: 15px;

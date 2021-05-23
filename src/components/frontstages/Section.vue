@@ -123,7 +123,7 @@ export default {
       span {
         width: 77px;
         font-size: 40px;
-        color: #fff;
+        color: whitesmoke;
         font-weight: 700;
         line-height: 50px;
         margin-right: 10px;
