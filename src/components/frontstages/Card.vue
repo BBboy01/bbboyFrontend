@@ -13,7 +13,7 @@
 
 <script>
 import { getAllNote } from '../../requests/getNote'
-import { ref, reactive, toRefs, onMounted, watch, onUpdated, nextTick, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 
@@ -31,23 +31,16 @@ export default {
     const router = useRouter()
 
     let noteInfo = ref([])
-    let isShow = ref(props.isShow)
-
-    let cStyle = reactive({
-      opacity: 1,
-      transform: 'skew(0deg) translateY(0px)',
-    })
 
     const goInfo = id => {
       router.push({ path: `/note/${id}` })
     }
 
     const cToggle = computed(() => {
-      console.log('dio')
-
       return {
-        opacity: 1,
-        transform: 'skew(0deg) translateY(0px)'
+        opacity: props.isShow ? 1 : 0,
+        transform: props.isShow ? 'skew(0deg) translateY(0px)' : 'skew(-5deg) translateY(-30px)',
+        visibility: props.isShow ? "visible" : "hidden"
       }
     })
 
@@ -57,17 +50,9 @@ export default {
       })
     })
 
-    watch(() => {
-      return props.isShow
-    }, (status, preStatus) => {
-      cToggle(status)
-    })
-
     return {
       noteInfo,
       goInfo,
-      cStyle,
-      isShow,
       cToggle,
     }
   },
