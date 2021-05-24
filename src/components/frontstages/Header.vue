@@ -11,11 +11,12 @@
           <li @click="toggleCard">
             <div><img src="@/assets/images/note.svg" alt="" /></div>
             <div>笔记</div>
-            <Card :isShow="isShow" />
+            <Card :isShow="isShowNote" :noteInfo="noteInfo" />
           </li>
-          <li>
+          <li @click="toggleCardUpdate">
             <div><img src="@/assets/images/update.svg" alt="" /></div>
             <div>更新</div>
+            <Card :isShow="isShowUpdate" :noteInfo="noteInfoSorted" />
           </li>
           <li>
             <img src="@/assets/images/more.svg" alt="" />
@@ -34,20 +35,61 @@
 
 <script>
 import Card from './Card'
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
+import { getAllNote } from '../../requests/getNote'
 
 
 export default {
   setup () {
-    let isShow = ref(true)
+    let isShowNote = ref(false)
+    let isShowUpdate = ref(false)
+    let noteInfo = ref([])
+    let noteInfoSorted = ref([])
 
     const toggleCard = () => {
-      isShow.value = !isShow.value
+      isShowNote.value = !isShowNote.value
+    }
+    const toggleCardUpdate = () => {
+      isShowUpdate.value = !isShowUpdate.value
     }
 
+
+    function myTimeToLocal (inputTime) {
+      if (!inputTime && typeof inputTime !== 'number') {
+        return ''
+      }
+      var localTime = ''
+      inputTime = new Date(inputTime).getTime()
+      const offset = (new Date()).getTimezoneOffset()
+      localTime = (new Date(inputTime - offset * 60000)).toISOString()
+      localTime = localTime.substr(0, localTime.lastIndexOf('.'))
+      localTime = localTime.replace('T', ' ')
+      return localTime
+    }
+
+    onMounted(() => {
+      getAllNote().then(res => {
+        noteInfo.value = res
+
+        nextTick(() => {
+          res.map(el => {
+            el.update_time = Date.parse(myTimeToLocal(el.update_time))
+          })
+          res.sort((av, bv) => {
+            return -(av.update_time - bv.update_time)
+          })
+          noteInfoSorted.value = res
+        })
+      })
+    })
+
     return {
-      isShow,
+      isShowNote,
+      isShowUpdate,
       toggleCard,
+      toggleCardUpdate,
+      noteInfo,
+      noteInfoSorted,
     }
   },
   components: {

@@ -2,7 +2,7 @@
   <div class="wrapper" :style="cToggle">
     <el-scrollbar height="300px">
       <ul class="list">
-        <li v-for="item in noteInfo" :key="item.id" @click="goInfo(item.id)">
+        <li v-for="item in noteList" :key="item.id" @click="goInfo(item.id)">
           <img :src="item.icon_url" alt="" />
           <span :title="item.title">{{ item.title }}</span>
         </li>
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { getAllNote } from '../../requests/getNote'
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -24,13 +23,17 @@ export default {
       default () {
         return false
       },
+    },
+    noteInfo: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
 
   setup (props) {
     const router = useRouter()
-
-    let noteInfo = ref([])
 
     const goInfo = id => {
       router.push({ path: `/note/${id}` })
@@ -44,16 +47,14 @@ export default {
       }
     })
 
-    onMounted(() => {
-      getAllNote().then(res => {
-        noteInfo.value = res
-      })
+    const noteList = computed(() => {
+      return props.noteInfo
     })
 
     return {
-      noteInfo,
       goInfo,
       cToggle,
+      noteList,
     }
   },
 
