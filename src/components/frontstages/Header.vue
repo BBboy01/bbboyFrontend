@@ -35,8 +35,9 @@
 
 <script>
 import Card from './Card'
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onUpdated } from 'vue'
 import { getAllNote } from '../../requests/getNote'
+import formatTime from '@/utils/formatTime'
 
 
 export default {
@@ -53,27 +54,13 @@ export default {
       isShowUpdate.value = !isShowUpdate.value
     }
 
-
-    function myTimeToLocal (inputTime) {
-      if (!inputTime && typeof inputTime !== 'number') {
-        return ''
-      }
-      var localTime = ''
-      inputTime = new Date(inputTime).getTime()
-      const offset = (new Date()).getTimezoneOffset()
-      localTime = (new Date(inputTime - offset * 60000)).toISOString()
-      localTime = localTime.substr(0, localTime.lastIndexOf('.'))
-      localTime = localTime.replace('T', ' ')
-      return localTime
-    }
-
     onMounted(() => {
       getAllNote().then(res => {
         noteInfo.value = res
 
         nextTick(() => {
           res.map(el => {
-            el.update_time = Date.parse(myTimeToLocal(el.update_time))
+            el.update_time = Date.parse(formatTime(el.update_time))
           })
           res.sort((av, bv) => {
             return -(av.update_time - bv.update_time)

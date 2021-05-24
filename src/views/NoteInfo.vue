@@ -4,7 +4,10 @@
       <el-scrollbar height="100vh">
         <Header></Header>
         <div id="dio">
-          <span class="title">{{ noteInfo.title }}</span>
+          <div class="head">
+            <span class="title">{{ noteInfo.title }}</span>
+            <span class="date">更新时间：{{ noteInfo.date }}</span>
+          </div>
           <div class="article-content" v-html="noteInfo.content"></div>
         </div>
       </el-scrollbar>
@@ -22,6 +25,7 @@ import 'highlight.js/scss/default.scss'
 // 引入个性化的vs2015样式
 import 'highlight.js/styles/vs2015.css'
 import { getSingleNote } from '../requests/getNote'
+import formatTime from '@/utils/formatTime'
 
 
 export default {
@@ -32,19 +36,22 @@ export default {
 
     let noteInfo = reactive({
       title: '',
-      content: ''
+      content: '',
+      date: ''
     })
 
     onMounted(async () => {
       let data = await getSingleNote(id.value)
       noteInfo.title = data.title
       noteInfo.content = data.content
+      noteInfo.date = formatTime(data.update_time)
     })
 
     onUpdated(async () => {
       let data = await getSingleNote(id.value)
       noteInfo.title = data.title
       noteInfo.content = data.content
+      noteInfo.date = formatTime(data.update_time)
     })
 
     onBeforeRouteUpdate(to => {
@@ -73,13 +80,22 @@ export default {
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    color: #e6efff;
+    color: whitesmoke;
     padding-bottom: 10px;
 
-    .title {
-      display: block;
-      font-size: 50px;
+    .head {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: 30px;
+
+      .title {
+        display: block;
+        font-size: 50px;
+      }
+
+      .date {
+        align-self: flex-end;
+      }
     }
 
     ul {
@@ -160,7 +176,7 @@ export default {
       background: #2b6695;
       border-radius: 6px 6px 6px 6px;
       box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
-      color: #ffffff;
+      color: whitesmoke;
       font-size: 18px;
       font-weight: bold;
       height: 25px;
@@ -174,7 +190,7 @@ export default {
       background: #2b6600;
       border-radius: 6px 6px 6px 6px;
       box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
-      color: #ffffff;
+      color: whitesmoke;
       font-size: 15px;
       font-weight: bold;
       height: 24px;
@@ -188,7 +204,7 @@ export default {
       background: #5b9600;
       border-radius: 6px 6px 6px 6px;
       box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
-      color: #ffffff;
+      color: whitesmoke;
       font-size: 13px;
       font-weight: bold;
       height: 24px;
