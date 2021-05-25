@@ -3,7 +3,7 @@
     <Bck>
       <el-scrollbar height="100vh">
         <Header></Header>
-        <div id="dio">
+        <div id="dio" data-aos="fade-in">
           <div class="head">
             <span class="title">{{ noteInfo.title }}</span>
             <span class="date">更新时间：{{ noteInfo.date }}</span>
@@ -18,7 +18,7 @@
 <script>
 import Header from '../components/frontstages/Header'
 import Bck from '../components/frontstages/InfoBackground'
-import { ref, reactive, onMounted, onUpdated } from 'vue'
+import { ref, reactive, onMounted, onUpdated, computed } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 // 引入默认样式
 import 'highlight.js/scss/default.scss'
@@ -43,14 +43,14 @@ export default {
     onMounted(async () => {
       let data = await getSingleNote(id.value)
       noteInfo.title = data.title
-      noteInfo.content = data.content
+      noteInfo.content = Buffer.from(data.content, 'base64').toString('utf-8')
       noteInfo.date = formatTime(data.update_time)
     })
 
     onUpdated(async () => {
       let data = await getSingleNote(id.value)
       noteInfo.title = data.title
-      noteInfo.content = data.content
+      noteInfo.content = Buffer.from(data.content, 'base64').toString('utf-8')
       noteInfo.date = formatTime(data.update_time)
     })
 
@@ -106,11 +106,11 @@ export default {
     }
 
     p {
-      margin: 10px 0;
+      margin: 15px 0;
 
       code {
         color: #2bd600;
-        padding: 3px 5px;
+        padding: 1px 5px;
         margin: 0 2px;
         border-radius: 2px;
         white-space: nowrap;
@@ -129,6 +129,7 @@ export default {
       position: relative;
       font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New,
         monospace;
+      margin: 20px 0;
 
       ol,
       li,
@@ -161,14 +162,55 @@ export default {
           }
         }
       }
+
       b.name {
         position: absolute;
         top: 0.8rem;
         right: 1rem;
         z-index: 10;
-        color: hsla(0, 0%, 100%, 0.4);
+        color: hsla(0, 0%, 100%, 0);
         pointer-events: none;
         font-size: 0.75rem;
+        transition: color 0.5s ease;
+      }
+
+      &:hover {
+        b.name {
+          color: hsla(0, 0%, 100%, 0.4);
+        }
+      }
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      margin: 15px 0;
+      width: 100%;
+      text-align: center;
+
+      thead {
+        background-color: rgba(36, 35, 41, 0.8);
+        color: whitesmoke;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: bottom;
+        text-align: center;
+      }
+
+      td,
+      th {
+        border-left: 1px solid rgba(71, 69, 84, 1);
+        border-width: 0 0 0 1px;
+        font-size: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 0.5em 1em;
+        background-color: transparent;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: rgba(71, 69, 84, 0.6);
       }
     }
 

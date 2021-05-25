@@ -16,3 +16,10 @@ export function getSingleNote(id = 1) {
     method: "get",
   });
 }
+
+export function getCategories() {
+  return request({
+    url: "/api/categories",
+    method: "get",
+  });
+}

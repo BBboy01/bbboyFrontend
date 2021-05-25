@@ -46,8 +46,8 @@ export default {
 
   @keyframes dSOCvT {
     0% {
-      opacity: 0;
-      filter: blur(4px) saturate(200%) brightness(200%) hue-rotate(30deg);
+      opacity: 0.8;
+      filter: blur(1px) saturate(120%) brightness(120%) hue-rotate(30deg);
     }
     100% {
       opacity: 1;
@@ -56,7 +56,7 @@ export default {
   }
 
   .stars {
-    animation: 2s ease 0s 1 normal forwards running dSOCvT;
+    animation: 2s linear infinite alternate dSOCvT;
   }
 
   img {

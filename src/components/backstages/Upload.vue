@@ -2,9 +2,16 @@
   <div class="wrapper">
     <el-form :model="form" label-width="80px" :rules="rules" ref="ruleForm">
       <el-form-item label="分类" prop="category">
-        <el-input v-model="form.category"></el-input>
+        <el-select v-model="form.category" placeholder="请选择笔记类别">
+          <el-option
+            v-for="(item, index) in categoryList"
+            :key="index"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
       </el-form-item>
-      <el-form-item label="图标URL" prop="iconUrl">
+      <el-form-item label="图标URL">
         <el-input v-model="form.iconUrl"></el-input>
       </el-form-item>
       <el-form-item label="文件">
@@ -34,7 +41,8 @@
 
 <script>
 import { ref, reactive, onMounted, nextTick } from 'vue'
-import { uploadNote } from '../../requests/upload'
+import { uploadNote } from '@/requests/upload'
+import { getCategories } from '@/requests/getNote'
 import { ElMessage } from 'element-plus'
 
 
@@ -44,6 +52,8 @@ export default {
     const ruleForm = ref(null)
 
     let fileList = ref([])
+    let categoryList = ref([])
+    let category = ref('')
     let form = reactive({
       title: '',
       category: '',
@@ -53,9 +63,6 @@ export default {
     let rules = reactive({
       category: [
         { required: true, message: '请输入分类名称', trigger: 'blur' },
-      ],
-      iconUrl: [
-        { required: true, message: '请输入图标地址', trigger: 'blur' },
       ],
     })
 
@@ -87,6 +94,7 @@ export default {
           let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
           upload.value.clearFiles()
           ruleForm.value.resetFields()
+          form.iconUrl = ''
           if (data.statusCode === 4001) {
             ElMessage({
               showClose: true,
@@ -103,14 +111,17 @@ export default {
         } else {
           ElMessage({
             showClose: true,
-            message: '每个参数都为必填',
+            message: '必填参数未填写',
             type: 'warning'
           })
           return false
         }
       })
-
     }
+
+    onMounted(async () => {
+      categoryList.value = (await getCategories()).categoryList
+    })
 
     return {
       fileList,
@@ -121,6 +132,8 @@ export default {
       uploadFile,
       rules,
       ruleForm,
+      categoryList,
+      category,
     }
   },
 }

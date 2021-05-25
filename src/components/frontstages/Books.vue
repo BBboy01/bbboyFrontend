@@ -1,5 +1,5 @@
 <template>
-  <div class="book">
+  <div class="book" data-aos="zoom-in-left" data-aos-duration="1000">
     <div class="cover">
       <div class="content">
         <img :src="iconUrl" alt="" />

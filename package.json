@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "BBblog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,7 @@
     "up": "git add . && git commit -m '.' && git push"
   },
   "dependencies": {
+    "aos": "^3.0.0-beta.6",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "echarts": "^5.1.1",

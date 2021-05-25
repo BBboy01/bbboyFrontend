@@ -9,7 +9,12 @@
       <span class="slogan">
         其实人跟树一样，越是向往高出的阳光，他的根就要越往下，伸向地底深处...
       </span>
-      <div class="button" @click="goBackstage">
+      <div
+        class="button"
+        @click="goBackstage"
+        data-aos="fade-up"
+        data-aos-anchor-placement="center-bottom"
+      >
         <div class="icon-wrapper">
           <img src="@/assets/images/credit.svg" class="icon" alt="" />
           <img src="@/assets/images/icon-ring.svg" class="ring" alt="" />

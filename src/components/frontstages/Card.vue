@@ -2,7 +2,12 @@
   <div class="wrapper" :style="cToggle" ref="Card" id="kaDio">
     <el-scrollbar height="300px">
       <ul class="list">
-        <li v-for="item in noteList" :key="item.id" @click="goInfo(item.id)">
+        <li
+          v-for="item in noteList"
+          :key="item.id"
+          @click="goInfo(item.id)"
+          class="itme"
+        >
           <img :src="item.icon_url" alt="" />
           <span :title="item.title">{{ item.title }}</span>
         </li>
@@ -106,15 +111,20 @@ export default {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-    li {
+    .itme {
       display: grid;
       grid-template-columns: 30px auto;
       gap: 10px;
       margin-right: 5px;
+      color: rgba(182, 182, 182, 0.7);
 
       &:hover {
         span {
           color: whitesmoke;
+        }
+
+        img {
+          transform: scale(1.1);
         }
       }
 
@@ -122,14 +132,14 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        color: rgba(255, 255, 255, 0.7);
-        transition: 0.3s;
+        transition: color 0.3s ease-in-out;
         line-height: 30px;
       }
 
       img {
         width: 100%;
         height: auto;
+        transition: transform 0.3s ease-in-out;
       }
     }
   }

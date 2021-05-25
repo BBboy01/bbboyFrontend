@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="logo">
-        <a href="/">
+        <a href="/home">
           <img src="@/assets/images/logo.svg" alt="" />
         </a>
       </div>
@@ -43,7 +43,7 @@
 
 <script>
 import Card from './Card'
-import { ref, onMounted, nextTick, onUpdated } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { getAllNote } from '../../requests/getNote'
 import formatTime from '@/utils/formatTime'
 
@@ -136,6 +136,11 @@ export default {
       height: 44px;
       left: 0;
       position: absolute;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 

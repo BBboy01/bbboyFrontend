@@ -1,25 +1,25 @@
 <template>
   <div class="wrapper">
     <!-- <canvas id="myCanvas" @mousemove="followMouse"></canvas> -->
-    <canvas id="myCanvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <slot> </slot>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 
 
 export default {
   setup () {
+    let canvas = ref(null)
 
     onMounted(() => {
-      let canvas = document.getElementById("myCanvas")
-      let ctx = canvas.getContext("2d")
+      let ctx = canvas.value.getContext("2d")
 
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      canvas.style.position = "fixed"
+      canvas.value.width = window.innerWidth
+      canvas.value.height = window.innerHeight
+      canvas.value.style.position = "fixed"
       ctx.lineWidth = 0.3
       ctx.strokeStyle = new Color(150).style
 
@@ -46,8 +46,8 @@ export default {
       }
       //创建Dot类以及一系列方法
       function Dot () {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * canvas.value.width
+        this.y = Math.random() * canvas.value.height
 
         this.vx = -0.5 + Math.random()
         this.vy = -0.5 + Math.random()
@@ -71,10 +71,10 @@ export default {
         for (let i = 0; i < dots.nb; i++) {
           let dot = dots.array[i]
 
-          if (dot.y < 0 || dot.y > canvas.height) {
+          if (dot.y < 0 || dot.y > canvas.value.height) {
             dot.vx = dot.vx
             dot.vy = -dot.vy
-          } else if (dot.x < 0 || dot.x > canvas.width) {
+          } else if (dot.x < 0 || dot.x > canvas.value.width) {
             dot.vx = -dot.vx
             dot.vy = dot.vy
           }
@@ -84,7 +84,7 @@ export default {
       }
 
       function animateDots () {
-        ctx.clearRect(0, 0, canvas.width, canvas.height) //清除画布，否则线条会连在一起
+        ctx.clearRect(0, 0, canvas.value.width, canvas.value.height) //清除画布，否则线条会连在一起
         moveDots()
         drawDots()
         requestAnimationFrame(animateDots)
@@ -110,6 +110,7 @@ export default {
     })
 
     return {
+      canvas,
     }
   },
   components: {
