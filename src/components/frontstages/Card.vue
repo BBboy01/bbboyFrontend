@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="cToggle">
+  <div class="wrapper" :style="cToggle" ref="Card" id="kaDio">
     <el-scrollbar height="300px">
       <ul class="list">
         <li v-for="item in noteList" :key="item.id" @click="goInfo(item.id)">
@@ -32,8 +32,25 @@ export default {
     }
   },
 
-  setup (props) {
+  setup (props, { emit }) {
     const router = useRouter()
+
+    let Card = ref(null)
+
+    let shouldClose = ref(true)
+    let isExist = ref(false)
+
+    onMounted(() => {
+      Card.value.addEventListener('mouseenter', () => {
+        shouldClose.value = true
+      })
+      Card.value.addEventListener('mouseleave', () => {
+        if (shouldClose.value) {
+          emit('closeCard')
+        }
+        shouldClose.value = false
+      })
+    })
 
     const goInfo = id => {
       router.push({ path: `/note/${id}` })
@@ -55,6 +72,9 @@ export default {
       goInfo,
       cToggle,
       noteList,
+      Card,
+      shouldClose,
+      isExist,
     }
   },
 
