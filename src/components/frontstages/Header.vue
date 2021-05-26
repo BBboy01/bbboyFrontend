@@ -34,6 +34,7 @@
           </li>
           <li>
             <img src="@/assets/images/profile.svg" alt="" />
+            <LoginCard />
           </li>
         </ul>
       </div>
@@ -43,6 +44,7 @@
 
 <script>
 import Card from './Card'
+import LoginCard from './LoginCard'
 import { ref, onMounted, nextTick } from 'vue'
 import { getAllNote } from '../../requests/getNote'
 import formatTime from '@/utils/formatTime'
@@ -110,6 +112,7 @@ export default {
       close,
       isExist,
       Header,
+      LoginCard,
     }
   },
   components: {

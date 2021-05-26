@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs :tab-position="tabPosition">
+    <el-tabs :tab-position="tabPosition" class="chart" data-aos="fade-in">
       <el-tab-pane label="笔记点击量"><slot name="visits" /></el-tab-pane>
       <el-tab-pane label="笔记类别占比"
         ><slot name="category-ratio"
@@ -29,4 +29,7 @@ export default {
 
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
+.chart {
+  height: 100%;
+}
 </style>

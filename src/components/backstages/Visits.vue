@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="indexChart" :style="{ width: '100%', height: '300px' }"></div>
+    <div ref="indexChart" :style="{ width: '100%', height: '500px' }"></div>
   </div>
 </template>
 

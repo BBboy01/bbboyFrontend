@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <div class="wrapper">
+    <div class="back-home">
+      <img
+        src="../assets/images/logo.svg"
+        alt=""
+        @click="goHome"
+        data-aos="fade-down"
+      />
+    </div>
     <Navigation>
       <template #visits>
         <Visits />
@@ -16,6 +24,7 @@
 
 <script>
 import { ref, onMounted, reactive, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import Navigation from '../components/backstages/Navigation'
 import Visits from '../components/backstages/Visits'
 import CategoryRatio from '../components/backstages/CategoryRatio'
@@ -24,8 +33,15 @@ import Upload from '../components/backstages/Upload'
 
 export default {
   setup () {
+    const router = useRouter()
+
+    const goHome = () => {
+      router.push({ path: '/home' })
+    }
+
 
     return {
+      goHome,
     }
   },
 
@@ -40,4 +56,24 @@ export default {
 
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
+.wrapper {
+  display: grid;
+  height: 100vh;
+  grid-template: 100%;
+  grid-template-rows: 15% auto;
+  overflow: hidden;
+
+  .back-home {
+    margin: 10px auto;
+
+    img {
+      transition: transform 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
 </style>

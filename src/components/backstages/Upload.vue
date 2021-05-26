@@ -24,7 +24,7 @@
           :http-request="uploadFile"
           ref="upload"
           :on-change="change"
-          limit="1"
+          :limit="1"
         >
           <el-button size="small" type="primary">选取文件</el-button>
           <template #tip>
