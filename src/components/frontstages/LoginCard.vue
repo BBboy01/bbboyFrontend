@@ -1,5 +1,5 @@
 <template>
-  <div>loggind,sal;d,sal;d,asld,lsa;,l;</div>
+  <div>login card</div>
 </template>
 
 <script>
