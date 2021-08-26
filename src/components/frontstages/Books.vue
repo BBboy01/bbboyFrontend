@@ -3,7 +3,7 @@
     <div class="cover">
       <div class="content">
         <img :src="iconUrl" alt="" />
-        {{ articalName }}
+        {{ articleName }}
       </div>
     </div>
     <div class="background"></div>
@@ -14,7 +14,7 @@
 
 export default {
   props: {
-    articalName: {
+    articleName: {
       type: String,
       default () {
         return ''
@@ -26,12 +26,6 @@ export default {
         return ''
       }
     },
-  },
-
-  setup (props) {
-  },
-  components: {
-
   },
 }
 </script>

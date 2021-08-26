@@ -34,6 +34,7 @@ export default {
       date.value = formatTime(data.update_time)
     })
 
+
     return {
       title,
       content,

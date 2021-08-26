@@ -132,14 +132,14 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        transition: color 0.3s ease-in-out;
+        transition: color 0.2s ease-in-out;
         line-height: 30px;
       }
 
       img {
         width: 100%;
         height: auto;
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.2s ease-in-out;
       }
     }
   }

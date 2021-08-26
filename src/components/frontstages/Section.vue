@@ -29,8 +29,7 @@
             :articalName="item.title"
             :iconUrl="item.icon_url"
             @click="toNote(item.id)"
-          >
-          </Books>
+          />
         </template>
       </div>
     </div>
@@ -39,7 +38,7 @@
 
 <script>
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import Books from './Books'
 import { getAllNote } from '../../requests/getNote'
 import { onMounted } from 'vue'
@@ -49,7 +48,6 @@ export default {
   setup () {
     let noteInfo = ref([])
 
-    const route = useRoute()
     const router = useRouter()
 
     onMounted(() => {
@@ -123,7 +121,7 @@ export default {
       );
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: 2s ease 0s 1 normal forwards running dSOCvT;
+      animation: 1s ease 0s 1 normal forwards running dSOCvT;
 
       span {
         width: 77px;
@@ -143,7 +141,7 @@ export default {
     }
 
     .slogan {
-      animation: 3s ease 0s 1 normal forwards running dSOCvT;
+      animation: 2s ease 0s 1 normal forwards running dSOCvT;
     }
 
     .button {
