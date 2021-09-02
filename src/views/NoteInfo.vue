@@ -13,10 +13,7 @@ import InfoBackground from '../components/frontstages/InfoBackground'
 import NoteContent from '../components/frontstages/NoteContent'
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-// 引入默认样式
-import 'highlight.js/scss/default.scss'
-// 引入个性化的vs2015样式
-import 'highlight.js/styles/vs2015.css'
+import 'highlight.js/styles/night-owl.css'
 
 
 export default {

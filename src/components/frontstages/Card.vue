@@ -6,7 +6,7 @@
           v-for="item in noteList"
           :key="item.id"
           @click="goInfo(item.id)"
-          class="itme"
+          class="data-item"
         >
           <img :src="item.icon_url" alt="" />
           <span :title="item.title">{{ item.title }}</span>
@@ -111,9 +111,9 @@ export default {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-    .itme {
+    .data-item {
       display: grid;
-      grid-template-columns: 30px auto;
+      grid-template-columns: 35px auto;
       gap: 10px;
       margin-right: 5px;
       color: rgba(182, 182, 182, 0.7);
@@ -137,9 +137,10 @@ export default {
       }
 
       img {
-        width: 100%;
+        width: 30px;
         height: auto;
         transition: transform 0.2s ease-in-out;
+        margin: 5px;
       }
     }
   }

@@ -15,20 +15,20 @@ export default {
   setup () {
     // 获取标签容器
     let indexChart = ref(null)
-    let allNoteVists = ref([])
+    let allNoteVisits = ref([])
 
     onMounted(async () => {
       // 获取数据
-      allNoteVists.value = await getAllNote()
+      allNoteVisits.value = (await getAllNote()).data.orderedByTime
       // 初始化图表
       let barChart = echarts.init(indexChart.value)
 
       nextTick(() => {
-        let titles = allNoteVists.value.reduce((pre, cur) => {
+        let titles = allNoteVisits.value.reduce((pre, cur) => {
           pre.push(cur.title)
           return pre
         }, [])
-        let visits = allNoteVists.value.reduce((pre, cur) => {
+        let visits = allNoteVisits.value.reduce((pre, cur) => {
           pre.push(cur.visits)
           return pre
         }, [])

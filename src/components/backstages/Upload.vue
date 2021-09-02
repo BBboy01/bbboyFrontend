@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, nextTick } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { uploadNote } from '@/requests/upload'
 import { getCategories } from '@/requests/getNote'
 import { ElMessage } from 'element-plus'
@@ -95,7 +95,7 @@ export default {
           upload.value.clearFiles()
           ruleForm.value.resetFields()
           form.iconUrl = ''
-          if (data.statusCode === 4001) {
+          if (data.msg === "ok") {
             ElMessage({
               showClose: true,
               message: data.msg,
@@ -104,7 +104,7 @@ export default {
           } else {
             ElMessage({
               showClose: true,
-              message: data.msg,
+              message: "添加笔记成功",
               type: 'error'
             })
           }
@@ -120,7 +120,7 @@ export default {
     }
 
     onMounted(async () => {
-      categoryList.value = (await getCategories()).categoryList
+      categoryList.value = (await getCategories()).data.categories
     })
 
     return {

@@ -33,7 +33,13 @@
             <img src="@/assets/images/search.svg" alt="" />
           </li>
           <li>
-            <img src="@/assets/images/profile.svg" alt="" />
+            <a href="https://github.com/BBboy01">
+              <img
+                src="@/assets/images/github.png"
+                alt="github"
+                style="width: 35px; height: 35px"
+              />
+            </a>
             <!-- <LoginCard /> -->
           </li>
         </ul>
@@ -75,16 +81,16 @@ export default {
 
     onMounted(() => {
       getAllNote().then(res => {
-        noteInfo.value = res
+        noteInfo.value = res.data.orderedByTime
 
         nextTick(() => {
-          res.map(el => {
-            el.update_time = Date.parse(formatTime(el.update_time))
+          res.data.orderedByTime.map(el => {
+            el.update_time = Date.parse(formatTime(el.update_at))
           })
-          res.sort((av, bv) => {
+          res.data.orderedByTime.sort((av, bv) => {
             return -(av.update_time - bv.update_time)
           })
-          noteInfoSorted.value = res
+          noteInfoSorted.value = res.data.orderedByTime
         })
       })
 
@@ -165,6 +171,7 @@ export default {
         height: 100%;
         font-size: 15px;
         position: relative;
+        transition: all 0.3s ease;
 
         div {
           margin: 0 5px;

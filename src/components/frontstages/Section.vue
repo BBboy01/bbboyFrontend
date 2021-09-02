@@ -22,16 +22,14 @@
         <div class="text-wrapper">查看数据</div>
       </div>
     </div>
-    <div class="swipper">
-      <div class="pages">
-        <template v-for="item in noteInfo" :key="item.id">
-          <Books
-            :articalName="item.title"
-            :iconUrl="item.icon_url"
-            @click="toNote(item.id)"
-          />
-        </template>
-      </div>
+    <div class="pages">
+      <template v-for="item in noteInfo" :key="item.id">
+        <Books
+          :articleName="item.title"
+          :iconUrl="item.icon_url"
+          @click="toNote(item.id)"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -51,8 +49,8 @@ export default {
     const router = useRouter()
 
     onMounted(() => {
-      getAllNote(2).then(res => {
-        noteInfo.value = res
+      getAllNote().then(res => {
+        noteInfo.value = res.data.orderedByVisit.slice(0, 2)
       })
     })
 
@@ -80,13 +78,11 @@ export default {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .wrapper {
-  .swipper {
-    .pages {
-      display: grid;
-      grid-template-columns: 50% 50%;
-      gap: 30px;
-      cursor: pointer;
-    }
+  .pages {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 30px;
+    cursor: pointer;
   }
 
   display: grid;

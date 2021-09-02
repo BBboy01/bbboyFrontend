@@ -2,7 +2,7 @@ import { request } from "./base";
 
 export function uploadNote(title, category, content, iconUrl, timeStamp) {
   return request({
-    url: "/api/note/add",
+    url: "/note",
     method: "post",
     data: {
       title,

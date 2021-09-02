@@ -27,6 +27,12 @@ export default {
       }
     },
   },
+
+  setup (props) {
+  },
+  components: {
+
+  },
 }
 </script>
 
