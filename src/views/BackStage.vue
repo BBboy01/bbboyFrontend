@@ -8,6 +8,7 @@
         data-aos="fade-down"
       />
     </div>
+    <Login />
     <Navigation>
       <template #visits>
         <Visits />
@@ -29,6 +30,7 @@ import Navigation from '../components/backstages/Navigation'
 import Visits from '../components/backstages/Visits'
 import CategoryRatio from '../components/backstages/CategoryRatio'
 import Upload from '../components/backstages/Upload'
+import Login from '../components/backstages/Login'
 
 
 export default {
@@ -50,6 +52,7 @@ export default {
     Visits,
     CategoryRatio,
     Upload,
+    Login,
   },
 }
 </script>
@@ -62,6 +65,7 @@ export default {
   grid-template: 100%;
   grid-template-rows: 15% auto;
   overflow: hidden;
+  position: relative;
 
   .back-home {
     margin: 10px auto;

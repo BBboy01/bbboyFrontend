@@ -50,7 +50,7 @@ export default {
 
     onMounted(() => {
       getAllNote().then(res => {
-        noteInfo.value = res.data.orderedByVisit.slice(0, 2)
+        noteInfo.value = res.orderedByVisit.slice(0, 2)
       })
     })
 

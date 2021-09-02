@@ -4,7 +4,7 @@
       <el-form-item label="分类" prop="category">
         <el-select v-model="form.category" placeholder="请选择笔记类别">
           <el-option
-            v-for="(item, index) in categoryList"
+            v-for="(item, index) in categoryData.categories"
             :key="index"
             :label="item"
             :value="item"
@@ -52,7 +52,7 @@ export default {
     const ruleForm = ref(null)
 
     let fileList = ref([])
-    let categoryList = ref([])
+    let categoryData = ref([])
     let category = ref('')
     let form = reactive({
       title: '',
@@ -90,8 +90,8 @@ export default {
       ruleForm.value.validate(async valid => {
         if (valid) {
           upload.value.submit()
-          let timeStamp = Date.parse(new Date())
-          let data = await uploadNote(form.title, form.category, form.content, form.iconUrl, timeStamp)
+          if (!form.iconUrl) form.iconUrl = categoryData.value.iconUrls[category]
+          let data = await uploadNote(form.title, form.category, form.content, form.iconUrl)
           upload.value.clearFiles()
           ruleForm.value.resetFields()
           form.iconUrl = ''
@@ -120,7 +120,7 @@ export default {
     }
 
     onMounted(async () => {
-      categoryList.value = (await getCategories()).data.categories
+      categoryData.value = await getCategories()
     })
 
     return {
@@ -132,7 +132,7 @@ export default {
       uploadFile,
       rules,
       ruleForm,
-      categoryList,
+      categoryData,
       category,
     }
   },

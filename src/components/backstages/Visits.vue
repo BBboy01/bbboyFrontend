@@ -19,7 +19,7 @@ export default {
 
     onMounted(async () => {
       // 获取数据
-      allNoteVisits.value = (await getAllNote()).data.orderedByTime
+      allNoteVisits.value = (await getAllNote()).orderedByTime
       // 初始化图表
       let barChart = echarts.init(indexChart.value)
 
