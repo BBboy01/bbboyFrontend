@@ -51,16 +51,16 @@ export default {
     const upload = ref(null)
     const ruleForm = ref(null)
 
-    let fileList = ref([])
-    let categoryData = ref([])
-    let category = ref('')
-    let form = reactive({
+    const fileList = ref([])
+    const categoryData = ref([])
+    const category = ref('')
+    const form = reactive({
       title: '',
       category: '',
       iconUrl: '',
       content: ''
     })
-    let rules = reactive({
+    const rules = reactive({
       category: [
         { required: true, message: '请输入分类名称', trigger: 'blur' },
       ],

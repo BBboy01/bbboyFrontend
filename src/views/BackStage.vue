@@ -9,7 +9,9 @@
       />
     </div>
     <Login v-if="!userInfo.isLogin" />
-    <div alt="" class="username" v-else>username: {{ userInfo.username }}</div>
+    <div v-else class="user">
+      <User :username="userInfo.username" />
+    </div>
     <Navigation>
       <template #visits>
         <Visits />
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import Navigation from '../components/backstages/Navigation'
@@ -33,6 +35,7 @@ import Visits from '../components/backstages/Visits'
 import CategoryRatio from '../components/backstages/CategoryRatio'
 import Upload from '../components/backstages/Upload'
 import Login from '../components/backstages/Login'
+import User from '../components/backstages/User'
 
 
 export default {
@@ -61,6 +64,7 @@ export default {
     CategoryRatio,
     Upload,
     Login,
+    User,
   },
 }
 </script>
@@ -68,24 +72,19 @@ export default {
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
 .wrapper {
-  display: grid;
   height: 100vh;
-  grid-template: 100%;
-  grid-template-rows: 15% auto;
   overflow: hidden;
   position: relative;
 
-  .username {
+  .user {
     position: absolute;
     right: 5px;
     top: 5px;
     z-index: 1;
-    color: #333;
-    font-weight: bold;
   }
 
   .back-home {
-    margin: 10px auto;
+    margin: 20px 50%;
 
     img {
       transition: transform 0.2s ease-in-out;
