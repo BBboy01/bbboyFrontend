@@ -6,6 +6,9 @@ import mutations from "./mutations";
 const state = {
   user: {
     isLogin: window.localStorage.getItem("token") ? true : false,
+    username: window.localStorage.getItem("username")
+      ? window.localStorage.getItem("username")
+      : "",
   },
 };
 

@@ -1,9 +1,12 @@
 import { request } from "./base";
 
-export function getAllNote() {
+export function getAllNote(limit) {
   return request({
     url: "/note",
     method: "get",
+    params: {
+      limit,
+    },
   });
 }
 

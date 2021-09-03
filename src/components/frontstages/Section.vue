@@ -49,8 +49,8 @@ export default {
     const router = useRouter()
 
     onMounted(() => {
-      getAllNote().then(res => {
-        noteInfo.value = res.orderedByVisit.slice(0, 2)
+      getAllNote(2).then(res => {
+        noteInfo.value = res.orderedByVisit
       })
     })
 

@@ -78,7 +78,7 @@ export default {
         })
         upload.value.clearFiles()
       } else {
-        form.title = file.raw.name
+        form.title = file.raw.name.replace('.md', '')
         reader.readAsText(file.raw, 'utf8')
         reader.onload = () => {
           form.content = reader.result
@@ -95,19 +95,11 @@ export default {
           upload.value.clearFiles()
           ruleForm.value.resetFields()
           form.iconUrl = ''
-          if (data.msg === "ok") {
-            ElMessage({
-              showClose: true,
-              message: data.msg,
-              type: 'success'
-            })
-          } else {
-            ElMessage({
-              showClose: true,
-              message: "添加笔记成功",
-              type: 'error'
-            })
-          }
+          ElMessage({
+            showClose: true,
+            message: "添加笔记成功",
+            type: 'success'
+          })
         } else {
           ElMessage({
             showClose: true,

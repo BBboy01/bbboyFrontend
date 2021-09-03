@@ -8,7 +8,7 @@
         <el-input type="password" v-model="formLabelAlign.password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm">立即创建</el-button>
+        <el-button type="primary" @click="submitForm">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -33,8 +33,10 @@ export default {
       const data = await login(formLabelAlign.username, formLabelAlign.password)
       if (data.token) {
         window.localStorage.setItem('token', data.token)
+        window.localStorage.setItem('username', data.username)
       }
       store.commit('setIsLogin', true)
+      store.commit('setUserInfo', data.username)
     }
 
     return {

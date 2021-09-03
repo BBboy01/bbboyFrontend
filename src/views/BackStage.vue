@@ -8,7 +8,8 @@
         data-aos="fade-down"
       />
     </div>
-    <Login />
+    <Login v-if="!userInfo.isLogin" />
+    <div alt="" class="username" v-else>username: {{ userInfo.username }}</div>
     <Navigation>
       <template #visits>
         <Visits />
@@ -24,7 +25,8 @@
 </template>
 
 <script>
-import { ref, onMounted, reactive, nextTick } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import Navigation from '../components/backstages/Navigation'
 import Visits from '../components/backstages/Visits'
@@ -37,13 +39,19 @@ export default {
   setup () {
     const router = useRouter()
 
+    const store = useStore()
+
     const goHome = () => {
       router.push({ path: '/home' })
     }
 
+    const userInfo = computed(() => {
+      return store.state.user
+    })
 
     return {
       goHome,
+      userInfo
     }
   },
 
@@ -66,6 +74,15 @@ export default {
   grid-template-rows: 15% auto;
   overflow: hidden;
   position: relative;
+
+  .username {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 1;
+    color: #333;
+    font-weight: bold;
+  }
 
   .back-home {
     margin: 10px auto;

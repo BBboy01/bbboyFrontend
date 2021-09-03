@@ -33,14 +33,13 @@
             <img src="@/assets/images/search.svg" alt="" />
           </li>
           <li>
-            <a href="https://github.com/BBboy01">
+            <a href="https://hub.fastgit.org/BBboy01" target="_blank">
               <img
                 src="@/assets/images/github.png"
                 alt="github"
                 style="width: 35px; height: 35px"
               />
             </a>
-            <!-- <LoginCard /> -->
           </li>
         </ul>
       </div>
@@ -50,7 +49,6 @@
 
 <script>
 import Card from './Card'
-// import LoginCard from './LoginCard'
 import { ref, onMounted, nextTick } from 'vue'
 import { getAllNote } from '../../requests/getNote'
 import formatTime from '@/utils/formatTime'
@@ -118,7 +116,6 @@ export default {
       close,
       isExist,
       Header,
-      // LoginCard,
     }
   },
   components: {
