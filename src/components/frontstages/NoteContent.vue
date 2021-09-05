@@ -10,6 +10,7 @@
 
 <script>
 import { ref, watchEffect } from 'vue'
+
 import formatTime from '@/utils/formatTime'
 import { getSingleNote } from '../../requests/getNote'
 
@@ -40,10 +41,6 @@ export default {
       content,
       date,
     }
-  },
-
-  components: {
-
   },
 }
 </script>

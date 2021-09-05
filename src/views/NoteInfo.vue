@@ -8,12 +8,14 @@
 </template>
 
 <script>
+import { ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+
+import 'highlight.js/styles/night-owl.css'
+
 import Header from '../components/frontstages/Header'
 import InfoBackground from '../components/frontstages/InfoBackground'
 import NoteContent from '../components/frontstages/NoteContent'
-import { ref, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
-import 'highlight.js/styles/night-owl.css'
 
 
 export default {

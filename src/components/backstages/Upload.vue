@@ -41,9 +41,11 @@
 
 <script>
 import { ref, reactive, onMounted } from 'vue'
+
+import { ElMessage } from 'element-plus'
+
 import { uploadNote } from '@/requests/upload'
 import { getCategories } from '@/requests/getNote'
-import { ElMessage } from 'element-plus'
 
 
 export default {

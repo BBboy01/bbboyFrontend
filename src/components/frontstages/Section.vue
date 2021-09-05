@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
 import Books from './Books'
 import { getAllNote } from '../../requests/getNote'
-import { onMounted } from 'vue'
 
 
 export default {

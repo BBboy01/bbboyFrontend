@@ -6,7 +6,9 @@
 
 <script>
 import { ref, onMounted, nextTick } from 'vue'
+
 import * as echarts from 'echarts'
+
 import { getAllNote } from '../../requests/getNote'
 import { visitsOption } from '../../utils/chartsOption'
 

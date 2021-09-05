@@ -48,10 +48,11 @@
 </template>
 
 <script>
-import Card from './Card'
 import { ref, onMounted, nextTick } from 'vue'
+
 import { getAllNote } from '../../requests/getNote'
 import formatTime from '@/utils/formatTime'
+import Card from './Card'
 
 
 export default {

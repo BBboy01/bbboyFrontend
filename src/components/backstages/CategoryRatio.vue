@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import { ref, onMounted, reactive, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
+
 import * as echarts from 'echarts'
+
 import { categoryRatioOption } from '../../utils/chartsOption'
 import { getAllNote } from '../../requests/getNote'
 
