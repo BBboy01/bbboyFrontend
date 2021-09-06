@@ -29,9 +29,9 @@
           <li>
             <img src="@/assets/images/more.svg" alt="" />
           </li>
-          <li>
+          <!-- <li>
             <img src="@/assets/images/search.svg" alt="" />
-          </li>
+          </li> -->
           <li>
             <a href="https://hub.fastgit.org/BBboy01" target="_blank">
               <img

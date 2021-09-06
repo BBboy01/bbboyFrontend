@@ -86,7 +86,7 @@ export default {
   }
 
   display: grid;
-  grid-template-columns: 500px auto;
+  grid-template-columns: 450px auto;
   max-width: 1234px;
   margin: 0px auto;
   padding: 0px 30px;

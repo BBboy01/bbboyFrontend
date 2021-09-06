@@ -1,8 +1,9 @@
 <template>
   <div>
-    <Waves />
-    <Header />
-    <Section />
+    <Waves>
+      <Header />
+      <Section />
+    </Waves>
   </div>
 </template>
 
