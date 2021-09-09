@@ -93,7 +93,7 @@ export default {
         if (valid) {
           upload.value.submit()
           if (!form.iconUrl) form.iconUrl = categoryData.value.iconUrls[category]
-          let data = await uploadNote(form.title, form.category, form.content, form.iconUrl)
+          await uploadNote(form.title, form.category, form.content, form.iconUrl)
           upload.value.clearFiles()
           ruleForm.value.resetFields()
           form.iconUrl = ''
@@ -114,7 +114,7 @@ export default {
     }
 
     onMounted(async () => {
-      categoryData.value = await getCategories()
+      categoryData.value = (await getCategories()).data
     })
 
     return {

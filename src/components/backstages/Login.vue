@@ -62,7 +62,7 @@ export default {
         if (!valid) {
           return false
         }
-        const data = await login(formLabelAlign.username, formLabelAlign.password)
+        const data = (await login(formLabelAlign.username, formLabelAlign.password)).data
         if (data.token) {
           window.localStorage.setItem('token', data.token)
           window.localStorage.setItem('username', data.username)
@@ -92,9 +92,6 @@ export default {
       toggleShow,
       ruleForm,
     }
-  },
-  components: {
-
   },
 }
 </script>

@@ -80,16 +80,16 @@ export default {
 
     onMounted(() => {
       getAllNote().then(res => {
-        noteInfo.value = res.orderedByTime
+        noteInfo.value = res.data.orderedByTime
 
         nextTick(() => {
-          res.orderedByTime.map(el => {
+          res.data.orderedByTime.map(el => {
             el.update_time = Date.parse(formatTime(el.update_at))
           })
-          res.orderedByTime.sort((av, bv) => {
+          res.data.orderedByTime.sort((av, bv) => {
             return -(av.update_time - bv.update_time)
           })
-          noteInfoSorted.value = res.orderedByTime
+          noteInfoSorted.value = res.data.orderedByTime
         })
       })
 

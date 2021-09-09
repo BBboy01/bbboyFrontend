@@ -29,10 +29,10 @@ export default {
     const date = ref("")
 
     watchEffect(async () => {
-      const data = await getSingleNote(props.id)
-      title.value = data.title
-      content.value = Buffer.from(data.content, 'base64').toString('utf-8')
-      date.value = formatTime(data.update_at)
+      const noteContent = await getSingleNote(props.id)
+      title.value = noteContent.data.title
+      content.value = Buffer.from(noteContent.data.content, 'base64').toString('utf-8')
+      date.value = formatTime(noteContent.data.update_at)
     })
 
 

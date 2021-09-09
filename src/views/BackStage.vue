@@ -27,10 +27,11 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
+import { checkStatus } from '@/requests/login'
 import Navigation from '../components/backstages/Navigation'
 import Visits from '../components/backstages/Visits'
 import CategoryRatio from '../components/backstages/CategoryRatio'
@@ -51,6 +52,15 @@ export default {
 
     const userInfo = computed(() => {
       return store.state.user
+    })
+
+    onMounted(async () => {
+      let result = await checkStatus()
+      if (result.msg !== 'ok') {
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('username')
+        store.commit('removeUserInfo')
+      }
     })
 
     return {

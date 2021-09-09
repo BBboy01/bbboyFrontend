@@ -20,7 +20,7 @@ export default {
     let originChart = ref(null)
 
     onMounted(async () => {
-      let data = (await getAllNote()).orderedByTime
+      let data = (await getAllNote()).data.orderedByTime
       // 获取visits的数据
       let result = {}
       data.forEach(item => {

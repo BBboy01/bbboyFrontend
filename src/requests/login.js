@@ -10,3 +10,19 @@ export function login(username, password) {
     },
   });
 }
+
+export function checkStatus() {
+  const token = window.localStorage.getItem("token");
+  const headers = "Bearer " + token;
+
+  return request({
+    url: "/auth",
+    method: "GET",
+    headers: {
+      Authorization: headers,
+    },
+    validateStatus: function(status) {
+      return status >= 200 && status <= 401;
+    },
+  });
+}
