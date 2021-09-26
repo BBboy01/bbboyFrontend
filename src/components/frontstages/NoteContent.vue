@@ -80,6 +80,7 @@ export default {
 
   p {
     margin: 15px 0;
+    line-height: 26px;
 
     code {
       color: #2bd600;
